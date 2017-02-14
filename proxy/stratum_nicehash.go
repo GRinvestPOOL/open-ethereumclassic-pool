@@ -9,7 +9,7 @@ import (
 	"errors"
 	"time"
 
-	"../util"
+	"github.com/LeChuckDE/open-ethereumclassic-pool/util"
 	"math/rand"
 	"strings"
 )
