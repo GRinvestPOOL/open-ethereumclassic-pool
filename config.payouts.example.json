@@ -1,11 +1,11 @@
 {
-	"threads": 2,
+	"threads": 6,
 	"coin": "etc",
 	"name": "main",
 
 	"proxy": {
 		"enabled": false,
-		"listen": "0.0.0.0:8888",
+		"listen": "0.0.0.0:9220",
 		"limitHeadersSize": 1024,
 		"limitBodySize": 256,
 		"behindReverseProxy": false,
@@ -19,7 +19,13 @@
 
 		"stratum": {
 			"enabled": false,
-			"listen": "0.0.0.0:8008",
+			"listen": "0.0.0.0:9221",
+			"timeout": "120s",
+			"maxConn": 8192
+		},
+		"stratum_nice_hash": {
+			"enabled": true,
+			"listen": "0.0.0.0:9222",
 			"timeout": "120s",
 			"maxConn": 8192
 		},
@@ -50,11 +56,11 @@
 		"enabled": false,
 		"purgeOnly": false,
 		"purgeInterval": "10m",
-		"listen": "0.0.0.0:8080",
+		"listen": "0.0.0.0:9223",
 		"statsCollectInterval": "5s",
 		"hashrateWindow": "30m",
 		"hashrateLargeWindow": "3h",
-		"luckWindow": [64, 128, 256],
+		"luckWindow": [8, 16, 32, 64, 128, 256],
 		"payments": 30,
 		"blocks": 50
 	},
@@ -63,12 +69,12 @@
 	"upstream": [
 		{
 			"name": "main",
-			"url": "http://127.0.0.1:8545",
+			"url": "http://127.0.0.1:8201",
 			"timeout": "10s"
 		},
 		{
 			"name": "backup",
-			"url": "http://127.0.0.2:8545",
+			"url": "http://127.0.0.2:8201",
 			"timeout": "10s"
 		}
 	],
@@ -76,7 +82,7 @@
 	"redis": {
 		"endpoint": "127.0.0.1:6379",
 		"poolSize": 10,
-		"database": 0,
+		"database": 1,
 		"password": ""
 	},
 
@@ -88,7 +94,7 @@
 		"immatureDepth": 20,
 		"keepTxFees": false,
 		"interval": "10m",
-		"daemon": "http://127.0.0.1:8545",
+		"daemon": "http://127.0.0.1:8201",
 		"timeout": "10s"
 	},
 
@@ -96,7 +102,7 @@
 		"enabled": true,
 		"requirePeers": 12,
 		"interval": "120m",
-		"daemon": "http://127.0.0.1:8545",
+		"daemon": "http://127.0.0.1:8201",
 		"timeout": "10s",
 		"address": "0x0",
 		"gas": "21000",
